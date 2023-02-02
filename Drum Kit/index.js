@@ -7,10 +7,13 @@ function handleClick() {
   let buttonInnerHTML = this.innerHTML;
 
   makeSound(buttonInnerHTML);
+
+  buttonAnimation(buttonInnerHTML);
 }
 
 document.addEventListener("keydown", function (event) {
   makeSound(event.key);
+  buttonAnimation(event.key);
 });
 
 function makeSound(key) {
@@ -36,7 +39,7 @@ function makeSound(key) {
       break;
 
     case "j":
-      let kick = new Audio("sounds/kick.mp3");
+      let kick = new Audio("sounds/kick-bass.mp3");
       kick.play();
       break;
 
@@ -53,4 +56,12 @@ function makeSound(key) {
     default:
       console.log(buttonInnerHTML);
   }
+}
+
+function buttonAnimation(currentKey) {
+  let activeButton = document.querySelector("." + currentKey);
+  activeButton.classList.add("pressed");
+  setTimeout(function () {
+    activeButton.classList.remove("pressed");
+  }, 100);
 }
